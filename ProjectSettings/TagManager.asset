@@ -16,6 +16,7 @@ TagManager:
   - BigEnemy
   - Flag
   - BigBullet
+  - MenuUI
   layers:
   - Default
   - TransparentFX
