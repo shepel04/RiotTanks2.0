@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class RepairTank : MonoBehaviour
 {
+    public AudioSource SupplyAudio;
+    
     private TankController _playerController;
     private Slider _healthBar;
     private RepairKitSliderAnimator _repAnim;
@@ -25,6 +27,7 @@ public class RepairTank : MonoBehaviour
         {
             _repAnim.AnimateRepairSlider();
             Destroy(other.gameObject);
+            SupplyAudio.Play();
             _playerController.HealthPoints = 100;
             _healthBar.value = 1;
         }

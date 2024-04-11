@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using ExitGames.Client.Photon.StructWrapping;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EnemyDestroer : MonoBehaviour
 {
@@ -16,12 +17,15 @@ public class EnemyDestroer : MonoBehaviour
     private BigEnemy _bigEnemyInst;
     private GameObject _destroyedEnemyCounter;
     private DestroyedEnemyCounter _counter;
-
+    private AudioSource _destroyAudio;
+    
     private void Start()
     {
         _destroyedEnemyCounter = GameObject.Find("DestroyedEnemyCounter");
         _counter = _destroyedEnemyCounter.GetComponent<DestroyedEnemyCounter>();
         Debug.Log(PlayerPrefs.GetInt("MaxDestroyedTanks", 0));
+        GameObject obj = GameObject.Find("TankDestroySound");
+        _destroyAudio = obj.GetComponent<AudioSource>();
     }
     
     private void OnTriggerEnter2D(Collider2D other)
@@ -30,6 +34,7 @@ public class EnemyDestroer : MonoBehaviour
         {
             _counter.Enemy += 1;
             BlowUpEnemy(other);
+            _destroyAudio.Play();
         }
     
         if (other.gameObject.CompareTag("BigEnemy"))
@@ -37,6 +42,7 @@ public class EnemyDestroer : MonoBehaviour
             if (CompareTag("Mine"))
             {
                 BlowUpBigEnemy(other);
+                _destroyAudio.Play();
                 _counter.BigEnemy += 1;
             }
             else
@@ -47,6 +53,7 @@ public class EnemyDestroer : MonoBehaviour
                 {
                     _counter.BigEnemy += 1;
                     BlowUpBigEnemy(other);
+                    _destroyAudio.Play();
                 }
             }
         }

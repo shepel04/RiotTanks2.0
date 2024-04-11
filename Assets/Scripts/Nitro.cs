@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Nitro : MonoBehaviour
 {
     public float SpeedMultiplier = 2f;
+    public AudioSource SupplyAudio;
     
     private TankController _player;
     private Slider _nitroSlider;
@@ -25,7 +27,7 @@ public class Nitro : MonoBehaviour
         {
             _player = GetComponent<TankController>();
             Destroy(other.gameObject);
-
+            SupplyAudio.Play();
             if (!_isBoostActive)
             {
                 if (_player != null)

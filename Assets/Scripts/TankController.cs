@@ -16,6 +16,7 @@ public class TankController : MonoBehaviourPun
     public bool IsArmorActive;
     public GameObject TankSprite;
     public GameObject LoseCanvas;
+    public AudioSource DriveAudio, StayAudio, DestroyAudio;
     
     private Rigidbody2D _tankRigidbody;
     private bool _isMoving;
@@ -41,6 +42,20 @@ public class TankController : MonoBehaviourPun
         transform.Rotate(Vector3.forward * rotationAmount);
         
         _isMoving = Mathf.Abs(moveInput) > 0.1f;
+        if (_isMoving)
+        {
+            if (StayAudio.isPlaying) 
+                StayAudio.Stop();
+            if (!DriveAudio.isPlaying) 
+                DriveAudio.Play();
+        }
+        else
+        {
+            if (DriveAudio.isPlaying) 
+                DriveAudio.Stop();
+            if (!StayAudio.isPlaying) 
+                StayAudio.Play();
+        }
         _tankAnimator.SetBool("IsMoving", _isMoving);
         
         if (HealthPoints <= 0)
@@ -53,7 +68,8 @@ public class TankController : MonoBehaviourPun
     {
         GameObject explosion = Instantiate(TankExplosionPrefab, transform.position, Quaternion.identity);
         Destroy(explosion, explosion.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-            
+        DestroyAudio.Play();
+        
         Destroy(gameObject); 
         Instantiate(ReplacementTankPrefab, transform.position, Quaternion.identity);
         
@@ -61,6 +77,6 @@ public class TankController : MonoBehaviourPun
             
         _hud.SetActive(false);
         LoseCanvas.SetActive(true);
-        Time.timeScale = 0;
+        enabled = false;
     }
 }

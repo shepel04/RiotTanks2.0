@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class DoubleArmor : MonoBehaviour
 {
+    public AudioSource SupplyAudio;
+    
     private TankController _player;
     private Slider _doubleArmroSlider;
     private Coroutine _speedBoostCoroutine;
@@ -23,7 +25,8 @@ public class DoubleArmor : MonoBehaviour
         if (other.CompareTag("DoubleArmor"))
         {
             Destroy(other.gameObject);
-
+            SupplyAudio.Play();
+            
             if (!_player.IsArmorActive)
             {
                 if (_player != null)

@@ -10,6 +10,7 @@ public class TankShooting : MonoBehaviour
     public GameObject SmokePrefab;
     public float shootCooldown = 3f;
     public CooldownProgressBar ProgressBar;
+    public AudioSource TankShootingAudio;
 
     private GameObject _smoke;
     private float _lastShootTime;
@@ -21,6 +22,7 @@ public class TankShooting : MonoBehaviour
             if (Input.GetKey(KeyCode.Space))
             {
                 Shoot();
+                TankShootingAudio.Play();
                 _smoke.transform.position = FirePosition.position;
                 _lastShootTime = Time.time;
             }

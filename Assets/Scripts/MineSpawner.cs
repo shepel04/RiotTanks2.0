@@ -11,6 +11,7 @@ public class MineSpawner : MonoBehaviour
     public GameObject MinePrefab; 
     public Transform PlayerTransform;
     public TextMeshProUGUI MinesCounterText;
+    public AudioSource MineAudio;
     
     private int _minesPlaced;
     private int _maxMines = 4;
@@ -44,6 +45,7 @@ public class MineSpawner : MonoBehaviour
         if (MinePrefab != null && PlayerTransform != null)
         {
             Instantiate(MinePrefab, PlayerTransform.position, PlayerTransform.rotation);
+            MineAudio.Play();
             _minesPlaced++;
         }
         else

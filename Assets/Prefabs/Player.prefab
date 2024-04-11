@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8781922301047899240}
@@ -291,7 +291,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf7f299f81c954311a8591053729934e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2000
+  speed: 70
+  TurretRotationSound: {fileID: 0}
 --- !u!114 &5672965594475787137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,6 +312,7 @@ MonoBehaviour:
   SmokePrefab: {fileID: 1650296332991146515, guid: 6e1eb1756fc734035b9c58d5cb317761, type: 3}
   shootCooldown: 3
   ProgressBar: {fileID: 0}
+  TankShootingAudio: {fileID: 0}
 --- !u!1 &5722323593522157623
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +379,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1977443766610051894}
@@ -403,6 +405,10 @@ MonoBehaviour:
   TankDestroyDelay: 3
   IsArmorActive: 0
   TankSprite: {fileID: 2104974058013336062}
+  LoseCanvas: {fileID: 0}
+  DriveAudio: {fileID: 0}
+  StayAudio: {fileID: 0}
+  DestroyAudio: {fileID: 0}
 --- !u!61 &6299228084055992989
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -432,10 +438,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.0046812}
+  m_Offset: {x: 0, y: 0.004681587}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -446,7 +452,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.2683053}
+  m_Size: {x: 2.0014648, y: 2.5201378}
   m_EdgeRadius: 0
 --- !u!61 &2118080314405997415
 BoxCollider2D:
@@ -480,7 +486,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.0046811104}
+  m_Offset: {x: -0.00894165, y: -0.004260063}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -491,7 +497,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.2527819}
+  m_Size: {x: 2.0193481, y: 2.5224972}
   m_EdgeRadius: 0
 --- !u!50 &5201194764139741072
 Rigidbody2D:
@@ -533,6 +539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpeedMultiplier: 2
+  SupplyAudio: {fileID: 0}
 --- !u!114 &3328484802298655762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,6 +552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46f62ed2e63ffdc4181ead98fbfeaf4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SupplyAudio: {fileID: 0}
 --- !u!114 &9206746154322641640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -557,6 +565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c62696ac2e7e59048a13fb1a762100ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SupplyAudio: {fileID: 0}
 --- !u!114 &3905813736422662806
 MonoBehaviour:
   m_ObjectHideFlags: 0

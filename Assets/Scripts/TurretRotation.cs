@@ -6,19 +6,32 @@ using UnityEngine;
 public class TurretRotation : MonoBehaviourPun
 {
     public float speed = 1000f;
-    private float rotationAmount;
+    public AudioSource TurretRotationSound;
+    
+    private float _rotationAmount;
     
     void Update()
     {
         if (Input.GetKey(KeyCode.Z))
         {
-            rotationAmount = speed * Time.deltaTime;
-            transform.Rotate(Vector3.forward * rotationAmount);
+            if (!TurretRotationSound.isPlaying)  
+                TurretRotationSound.Play();
+            
+            _rotationAmount = speed * Time.deltaTime;
+            transform.Rotate(Vector3.forward * _rotationAmount);
         }
-        if (Input.GetKey(KeyCode.X))
+        else if (Input.GetKey(KeyCode.X))
         {
-            rotationAmount = -speed * Time.deltaTime;
-            transform.Rotate(Vector3.forward * rotationAmount);
+            if (!TurretRotationSound.isPlaying)  
+                TurretRotationSound.Play();
+            
+            _rotationAmount = -speed * Time.deltaTime;
+            transform.Rotate(Vector3.forward * _rotationAmount);
+        }
+        else
+        {
+            TurretRotationSound.Stop();
+            
         }
     }
 }

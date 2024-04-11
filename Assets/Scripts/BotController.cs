@@ -22,12 +22,16 @@ public class BotController : MonoBehaviour
     private float _lastShootTime;
     private EnemyAI _ai;
     private Quaternion _previousRotation;
+    private AudioSource _shootAudio;
 
+    
     private void Start()
     {
         _lastShootTime = Time.time;
         _ai = GetComponent<EnemyAI>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        GameObject obj = GameObject.Find("ShootSound");
+        _shootAudio = obj.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -98,7 +102,7 @@ public class BotController : MonoBehaviour
         {
             Rigidbody2D bulletInstance = Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
             bulletInstance.velocity = FirePoint.up * BulletSpeed;
-
+            _shootAudio.Play();
             _smoke = Instantiate(SmokePrefab, FirePoint.position, FirePoint.rotation);
             Destroy(_smoke, _smoke.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
 
