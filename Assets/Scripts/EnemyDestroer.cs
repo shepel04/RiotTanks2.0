@@ -16,19 +16,14 @@ public class EnemyDestroer : MonoBehaviour
     private BigEnemy _bigEnemyInst;
     private GameObject _destroyedEnemyCounter;
     private DestroyedEnemyCounter _counter;
-    private PlayfabManager _playfabManager;
 
     private void Start()
     {
         _destroyedEnemyCounter = GameObject.Find("DestroyedEnemyCounter");
         _counter = _destroyedEnemyCounter.GetComponent<DestroyedEnemyCounter>();
+        Debug.Log(PlayerPrefs.GetInt("MaxDestroyedTanks", 0));
     }
-
-    private void Update()
-    {
-        CheckMaxDestroyed();
-    }
-
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("EnemyEasy"))
@@ -55,18 +50,19 @@ public class EnemyDestroer : MonoBehaviour
                 }
             }
         }
+        
+        CheckMaxDestroyed();
     }
 
     public void CheckMaxDestroyed()
     {
-        if (Time.timeScale == 0)
-        {
-            int sum = _counter.Enemy / 2 + _counter.BigEnemy / 2;
-            if (sum > PlayerPrefs.GetInt("MaxDestroyedTanks", 0)) {
-                PlayerPrefs.SetInt("MaxDestroyedTanks", sum);
-            }
-            _playfabManager.SendLeaderboard(sum);
+        Debug.Log("Enter");
+        int sum = _counter.Enemy / 2 + _counter.BigEnemy / 2;
+        if (sum > PlayerPrefs.GetInt("MaxDestroyedTanks", 0)) {
+            PlayerPrefs.SetInt("MaxDestroyedTanks", sum);
         }
+        
+        PlayerPrefs.Save();
     }
 
     private void BlowUpEnemy(Collision2D other)
