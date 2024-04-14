@@ -32,7 +32,8 @@ public class PlayfabManager : MonoBehaviour
 
         var request = new LoginWithCustomIDRequest
         {
-            CustomId = SystemInfo.deviceUniqueIdentifier,
+            //CustomId = SystemInfo.deviceUniqueIdentifier,
+            CustomId = SystemInfo.deviceModel,
             CreateAccount = true,
             InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
             {
@@ -83,7 +84,9 @@ public class PlayfabManager : MonoBehaviour
     void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result)
     {
         Debug.Log("Updated display name!");
+        
         Switcher.SwitchLeaderboard();
+        NameWindow.SetActive(false);
     }
 
     void OnSucces(LoginResult result)
